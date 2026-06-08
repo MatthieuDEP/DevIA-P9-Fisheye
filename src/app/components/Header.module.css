@@ -1,0 +1,44 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 42px 20px 30px;
+}
+
+.homeLink {
+  display: inline-flex;
+  border-radius: 4px;
+}
+
+.homeLink img {
+  width: 200px;
+  height: auto;
+}
+
+.header h1 {
+  color: #901c1c;
+  font-size: 36px;
+  font-weight: 400;
+}
+
+.homeLink:focus-visible {
+  outline: 3px solid #901c1c;
+  outline-offset: 5px;
+}
+
+@media (max-width: 850px) {
+  .header {
+    padding-top: 30px;
+  }
+
+  .homeLink img {
+    width: 160px;
+  }
+
+  .header h1 {
+    font-size: 30px;
+  }
+}
