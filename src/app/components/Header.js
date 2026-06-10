@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./Header.module.css";
 
-export default function Header() {
+export default function Header({ showTitle = true }) {
   return (
     <header className={styles.header}>
-      <Link href="/" aria-label="FishEye Home page" className={styles.homeLink}>
+      <Link href="/" aria-label="Accueil FishEye" className={styles.homeLink}>
         <Image
           src="/logoFisheye.png"
           alt=""
@@ -15,7 +15,7 @@ export default function Header() {
         />
       </Link>
 
-      <h1>Nos photographes</h1>
+      {showTitle && <h1>Nos photographes</h1>}
     </header>
   );
 }
