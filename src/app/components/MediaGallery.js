@@ -1,7 +1,19 @@
+"use client";
+
+import { useRef, useState } from "react";
+import Lightbox from "./Lightbox";
 import MediaCard from "./MediaCard";
 import styles from "./MediaGallery.module.css";
 
 export default function MediaGallery({ medias }) {
+  const [activeIndex, setActiveIndex] = useState(null);
+  const activeTriggerRef = useRef(null);
+
+  const openLightbox = (index, trigger) => {
+    activeTriggerRef.current = trigger;
+    setActiveIndex(index);
+  };
+
   return (
     <section className={styles.gallery} aria-label="Portfolio du photographe">
       <div className={styles.sort}>
@@ -14,12 +26,25 @@ export default function MediaGallery({ medias }) {
       </div>
 
       <ul className={styles.list}>
-        {medias.map((media) => (
+        {medias.map((media, index) => (
           <li key={media.id}>
-            <MediaCard media={media} />
+            <MediaCard
+              media={media}
+              onOpen={(trigger) => openLightbox(index, trigger)}
+            />
           </li>
         ))}
       </ul>
+
+      {activeIndex !== null && (
+        <Lightbox
+          medias={medias}
+          activeIndex={activeIndex}
+          onIndexChange={setActiveIndex}
+          onClose={() => setActiveIndex(null)}
+          returnFocusRef={activeTriggerRef}
+        />
+      )}
     </section>
   );
 }

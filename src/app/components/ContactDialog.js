@@ -10,11 +10,6 @@ export default function ContactDialog({
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef(null);
 
-  const closeModal = () => {
-    setIsOpen(false);
-    requestAnimationFrame(() => triggerRef.current?.focus());
-  };
-
   return (
     <>
       <button
@@ -29,7 +24,8 @@ export default function ContactDialog({
       {isOpen && (
         <ContactModal
           photographerName={photographerName}
-          onClose={closeModal}
+          onClose={() => setIsOpen(false)}
+          returnFocusRef={triggerRef}
         />
       )}
     </>

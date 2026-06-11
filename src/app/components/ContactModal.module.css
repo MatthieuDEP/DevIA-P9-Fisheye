@@ -1,16 +1,4 @@
-.bodyLocked {
-  overflow: hidden;
-}
-
 .overlay {
-  position: fixed;
-  z-index: 1000;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow-y: auto;
-  padding: 30px 20px;
   background: rgb(196 196 196 / 70%);
 }
 
@@ -42,22 +30,25 @@
 }
 
 .closeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex: none;
   width: 54px;
   height: 54px;
   border: 0;
-  color: #fff;
   background: transparent;
-  font: inherit;
-  font-size: 72px;
-  font-weight: 200;
-  line-height: 0.65;
   cursor: pointer;
 }
 
-.closeButton:hover,
-.closeButton:focus-visible {
-  color: #901c1c;
+.closeButton img {
+  width: 42px;
+  height: 42px;
+  transition: opacity 150ms ease;
+}
+
+.closeButton:hover img {
+  opacity: 0.65;
 }
 
 .closeButton:focus-visible,
@@ -146,7 +137,6 @@
   .closeButton {
     width: 42px;
     height: 42px;
-    font-size: 58px;
   }
 
   .form {

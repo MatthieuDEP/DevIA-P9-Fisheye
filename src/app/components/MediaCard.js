@@ -1,13 +1,18 @@
 import Image from "next/image";
 import styles from "./MediaCard.module.css";
 
-export default function MediaCard({ media }) {
+export default function MediaCard({ media, onOpen }) {
   const { title, image, video, likes } = media;
 
   return (
     <article className={styles.card}>
-      {image ? (
-        <div className={styles.mediaFrame}>
+      <button
+        className={styles.mediaButton}
+        type="button"
+        aria-label={`Afficher ${title} en grand`}
+        onClick={(event) => onOpen(event.currentTarget)}
+      >
+        {image ? (
           <Image
             src={`/${image}`}
             alt={title}
@@ -15,17 +20,16 @@ export default function MediaCard({ media }) {
             sizes="(max-width: 650px) calc(100vw - 40px), (max-width: 1100px) 50vw, 350px"
             className={styles.image}
           />
-        </div>
-      ) : (
-        <video
-          src={`/${video}`}
-          className={styles.video}
-          controls
-          aria-label={title}
-        >
-          Votre navigateur ne prend pas en charge cette vidéo.
-        </video>
-      )}
+        ) : (
+          <video
+            src={`/${video}`}
+            className={styles.video}
+            muted
+            preload="metadata"
+            aria-hidden="true"
+          />
+        )}
+      </button>
 
       <div className={styles.details}>
         <h2>{title}</h2>
