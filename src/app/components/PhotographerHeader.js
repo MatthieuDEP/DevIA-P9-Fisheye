@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ContactDialog from "./ContactDialog";
 import styles from "./PhotographerHeader.module.css";
 
 export default function PhotographerHeader({ photographer }) {
@@ -17,9 +18,10 @@ export default function PhotographerHeader({ photographer }) {
         <p className={styles.tagline}>{tagline}</p>
       </div>
 
-      <button className={styles.contactButton} type="button">
-        Contactez-moi
-      </button>
+      <ContactDialog
+        photographerName={name}
+        buttonClassName={styles.contactButton}
+      />
 
       <Image
         src={`/${portrait}`}

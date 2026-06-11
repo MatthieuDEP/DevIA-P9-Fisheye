@@ -1,0 +1,173 @@
+.bodyLocked {
+  overflow: hidden;
+}
+
+.overlay {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 30px 20px;
+  background: rgb(196 196 196 / 70%);
+}
+
+.modal {
+  width: 100%;
+  max-width: 669px;
+  padding: 25px 35px 38px;
+  border-radius: 5px;
+  background: #db8876;
+  box-shadow: 0 0 20px rgb(0 0 0 / 25%);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.header h2 {
+  color: #000;
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 1.08;
+}
+
+.header h2 span {
+  display: block;
+}
+
+.closeButton {
+  flex: none;
+  width: 54px;
+  height: 54px;
+  border: 0;
+  color: #fff;
+  background: transparent;
+  font: inherit;
+  font-size: 72px;
+  font-weight: 200;
+  line-height: 0.65;
+  cursor: pointer;
+}
+
+.closeButton:hover,
+.closeButton:focus-visible {
+  color: #901c1c;
+}
+
+.closeButton:focus-visible,
+.field input:focus-visible,
+.field textarea:focus-visible,
+.submitButton:focus-visible {
+  outline: 3px solid #000;
+  outline-offset: 3px;
+}
+
+.form {
+  margin-top: 30px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field + .field {
+  margin-top: 5px;
+}
+
+.field label {
+  color: #312e2e;
+  font-size: 36px;
+  line-height: 1.2;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  border: 0;
+  border-radius: 5px;
+  background: #fff;
+  font: inherit;
+  font-size: 22px;
+}
+
+.field input {
+  height: 68px;
+  padding: 10px 14px;
+}
+
+.field textarea {
+  min-height: 170px;
+  padding: 14px;
+  resize: vertical;
+}
+
+.submitButton {
+  min-width: 170px;
+  min-height: 69px;
+  margin-top: 26px;
+  padding: 18px;
+  border: 0;
+  border-radius: 5px;
+  color: #fff;
+  background: #901c1c;
+  font: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.submitButton:hover,
+.submitButton:focus-visible {
+  color: #000;
+  background: #d3573c;
+}
+
+@media (max-width: 700px) {
+  .overlay {
+    align-items: flex-start;
+    padding: 20px 12px;
+  }
+
+  .modal {
+    padding: 22px 20px 30px;
+  }
+
+  .header h2 {
+    font-size: 42px;
+  }
+
+  .closeButton {
+    width: 42px;
+    height: 42px;
+    font-size: 58px;
+  }
+
+  .form {
+    margin-top: 24px;
+  }
+
+  .field label {
+    font-size: 26px;
+  }
+
+  .field input {
+    height: 54px;
+  }
+
+  .field textarea {
+    min-height: 140px;
+  }
+
+  .submitButton {
+    min-height: 52px;
+    margin-top: 20px;
+    padding: 13px 18px;
+  }
+}
