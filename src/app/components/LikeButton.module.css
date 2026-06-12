@@ -1,0 +1,53 @@
+.container {
+  position: relative;
+  flex: none;
+}
+
+.button {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  color: #901c1c;
+  background: transparent;
+  font: inherit;
+  font-size: 24px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.button img {
+  width: 21px;
+  height: 24px;
+}
+
+.button:hover:not(:disabled) img {
+  transform: scale(1.12);
+}
+
+.button:focus-visible {
+  border-radius: 4px;
+  outline: 3px solid #901c1c;
+  outline-offset: 4px;
+}
+
+.button:disabled {
+  cursor: default;
+}
+
+.status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 650px) {
+  .button {
+    font-size: 20px;
+  }
+}

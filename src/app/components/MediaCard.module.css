@@ -47,22 +47,12 @@
   line-height: 1.2;
 }
 
-.likes {
-  display: inline-flex;
-  flex: none;
-  align-items: center;
-  gap: 6px;
-  font-size: 24px;
-  font-weight: 500;
-}
-
 @media (max-width: 650px) {
   .mediaButton {
     height: 260px;
   }
 
-  .details h2,
-  .likes {
+  .details h2 {
     font-size: 20px;
   }
 }

@@ -20,8 +20,24 @@ export const getAllMediasForPhotographer = (photographerId) =>
     where: { photographerId },
   });
 
-export const updateNumberOfLikes = (mediaId, newNumberOfLikes) =>
-  prisma.media.update({
-    where: { id: mediaId },
-    data: { likes: newNumberOfLikes },
+export const incrementMediaLikes = async (mediaId, photographerId) => {
+  const result = await prisma.media.updateMany({
+    where: {
+      id: mediaId,
+      photographerId,
+    },
+    data: {
+      likes: {
+        increment: 1,
+      },
+    },
   });
+
+  if (result.count === 0) {
+    return null;
+  }
+
+  return prisma.media.findUnique({
+    where: { id: mediaId },
+  });
+};

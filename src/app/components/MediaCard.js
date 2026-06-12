@@ -1,8 +1,9 @@
 import Image from "next/image";
+import LikeButton from "./LikeButton";
 import styles from "./MediaCard.module.css";
 
-export default function MediaCard({ media, onOpen }) {
-  const { title, image, video, likes } = media;
+export default function MediaCard({ media, onOpen, onLike }) {
+  const { title, image, video } = media;
 
   return (
     <article className={styles.card}>
@@ -33,10 +34,7 @@ export default function MediaCard({ media, onOpen }) {
 
       <div className={styles.details}>
         <h2>{title}</h2>
-        <p className={styles.likes} aria-label={`${likes} mentions j'aime`}>
-          <span>{likes}</span>
-          <span aria-hidden="true">&#9829;</span>
-        </p>
+        <LikeButton media={media} onLike={onLike} />
       </div>
     </article>
   );

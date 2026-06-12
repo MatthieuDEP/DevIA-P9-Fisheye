@@ -1,0 +1,40 @@
+.summary {
+  position: fixed;
+  z-index: 10;
+  right: max(20px, calc((100vw - 1240px) / 2 + 20px));
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  min-width: 376px;
+  padding: 20px 34px;
+  border-radius: 5px 5px 0 0;
+  color: #000;
+  background: #db8876;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.totalLikes {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.totalLikes img {
+  width: 21px;
+  height: 24px;
+  filter: brightness(0);
+}
+
+@media (max-width: 650px) {
+  .summary {
+    right: 12px;
+    left: 12px;
+    gap: 20px;
+    min-width: 0;
+    padding: 14px 20px;
+    font-size: 18px;
+  }
+}
