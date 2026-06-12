@@ -1,10 +1,11 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { addMediaLike } from "../actions/media-likes";
 import Lightbox from "./Lightbox";
 import MediaCard from "./MediaCard";
 import PhotographerSummary from "./PhotographerSummary";
+import SortMenu from "./SortMenu";
 import styles from "./MediaGallery.module.css";
 
 export default function MediaGallery({
@@ -13,12 +14,35 @@ export default function MediaGallery({
   photographerPrice,
 }) {
   const [galleryMedias, setGalleryMedias] = useState(medias);
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [sortCriterion, setSortCriterion] = useState("popularity");
+  const [activeMediaId, setActiveMediaId] = useState(null);
   const activeTriggerRef = useRef(null);
 
-  const openLightbox = (index, trigger) => {
+  const sortedMedias = useMemo(
+    () =>
+      [...galleryMedias].sort((firstMedia, secondMedia) => {
+        if (sortCriterion === "popularity") {
+          return secondMedia.likes - firstMedia.likes;
+        }
+
+        if (sortCriterion === "date") {
+          return secondMedia.date.localeCompare(firstMedia.date);
+        }
+
+        return firstMedia.title.localeCompare(secondMedia.title, "fr", {
+          sensitivity: "base",
+        });
+      }),
+    [galleryMedias, sortCriterion],
+  );
+
+  const activeIndex = sortedMedias.findIndex(
+    (media) => media.id === activeMediaId,
+  );
+
+  const openLightbox = (mediaId, trigger) => {
     activeTriggerRef.current = trigger;
-    setActiveIndex(index);
+    setActiveMediaId(mediaId);
   };
 
   const handleLike = async (mediaId) => {
@@ -69,33 +93,40 @@ export default function MediaGallery({
 
   return (
     <section className={styles.gallery} aria-label="Portfolio du photographe">
-      <div className={styles.sort}>
-        <label htmlFor="media-sort">Trier par</label>
-        <select id="media-sort" name="media-sort" defaultValue="popularity">
-          <option value="popularity">Popularité</option>
-          <option value="date">Date</option>
-          <option value="title">Titre</option>
-        </select>
-      </div>
+      <SortMenu
+        value={sortCriterion}
+        onChange={setSortCriterion}
+      />
+      <p className={styles.sortStatus} aria-live="polite">
+        Médias triés par{" "}
+        {sortCriterion === "popularity"
+          ? "popularité"
+          : sortCriterion === "date"
+            ? "date"
+            : "titre"}
+        .
+      </p>
 
       <ul className={styles.list}>
-        {galleryMedias.map((media, index) => (
+        {sortedMedias.map((media) => (
           <li key={media.id}>
             <MediaCard
               media={media}
-              onOpen={(trigger) => openLightbox(index, trigger)}
+              onOpen={(trigger) => openLightbox(media.id, trigger)}
               onLike={handleLike}
             />
           </li>
         ))}
       </ul>
 
-      {activeIndex !== null && (
+      {activeMediaId !== null && activeIndex !== -1 && (
         <Lightbox
-          medias={galleryMedias}
+          medias={sortedMedias}
           activeIndex={activeIndex}
-          onIndexChange={setActiveIndex}
-          onClose={() => setActiveIndex(null)}
+          onIndexChange={(index) =>
+            setActiveMediaId(sortedMedias[index].id)
+          }
+          onClose={() => setActiveMediaId(null)}
           returnFocusRef={activeTriggerRef}
         />
       )}
